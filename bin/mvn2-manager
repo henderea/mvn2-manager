@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'thor'
+require 'data_mapper'
+
+db_path = File.expand_path('~/mvn2-manager.db')
+
+DataMapper.setup(:default, "sqlite://#{db_path}")
+
+module Mvn2Manager
+  class Project < Thor
+    desc 'register [project-id]', 'Registers the current folder as a project (default project-id is folder name)'
+
+    def register(project_id = nil)
+      if project_id.nil?
+        project_id = File.basename(Dir.getwd)
+      end
+    end
+  end
+  class Config < Thor
+    desc 'add <config-id>', 'Create a new config with an ID of config-id'
+
+    def add(config_id)
+
+    end
+  end
+end
